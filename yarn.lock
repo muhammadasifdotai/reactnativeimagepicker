@@ -7921,6 +7921,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-image-picker@npm:^7.1.2":
+  version: 7.1.2
+  resolution: "react-native-image-picker@npm:7.1.2"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: af52328b7cb06c28549442f0d923cfa92dde8d5a968a642336df4c882f81adbf0e5e606a14de27f96883a76fa1e03230061c4080011c9107942edebc8e09c478
+  languageName: node
+  linkType: hard
+
 "react-native@npm:0.74.3":
   version: 0.74.3
   resolution: "react-native@npm:0.74.3"
@@ -8034,6 +8044,7 @@ __metadata:
     prettier: 2.8.8
     react: 18.2.0
     react-native: 0.74.3
+    react-native-image-picker: ^7.1.2
     react-test-renderer: 18.2.0
     typescript: 5.0.4
   languageName: unknown
