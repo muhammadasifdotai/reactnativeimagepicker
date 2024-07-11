@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, PermissionsAndroid, Image } from "react-native";
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 export default function App(): JSX.Element {
-  const [cameraPhoto, setCamerPhoto] = useState<string | null>(null);
-  const [galleryPhoto, setGalleryPhoto] = useState()
+  const [cameraPhoto, setCameraPhoto] = useState<string | null>(null);
+  const [galleryPhoto, setGalleryPhoto] = useState<string | null>(null);
 
   let options = {
     saveToPhotos: true,
     mediaType: 'photo',
   };
-
 
   // open Camera
   const openCamera = async () => {
@@ -25,29 +24,34 @@ export default function App(): JSX.Element {
       } else if (result.errorCode) {
         console.log('ImagePicker Error: ', result.errorMessage);
       } else {
-        setCamerPhoto(result.assets[0].uri);
+        setCameraPhoto(result.assets[0].uri);
       }
     }
   }
 
   // open Gallery
   const openGallery = async () => {
-    const result = await launchImageLibrary(options)
-    setGalleryPhoto(result.assets[0].uri)
+    const result = await launchImageLibrary(options);
+    console.log('Gallery',result)
+    if (result.assets && result.assets.length > 0) {
+      setGalleryPhoto(result.assets[0].uri);
+    }
   }
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={openCamera} style= {styles.button}>
+      <TouchableOpacity onPress={openCamera} style={styles.button}>
         <Text style={styles.text}>Open Camera</Text>
       </TouchableOpacity>
       {cameraPhoto && (
         <Image style={styles.image} source={{uri: cameraPhoto}} />
       )}
-      <TouchableOpacity onPress={openGallery} style= {styles.button}>
+      <TouchableOpacity onPress={openGallery} style={styles.button}>
         <Text style={styles.text}>Open Gallery</Text>
       </TouchableOpacity>
-      <Image style={styles.image} source={{uri: galleryPhoto}}/>
+      {galleryPhoto && (
+        <Image style={styles.image} source={{uri: galleryPhoto}} />
+      )}
     </View>
   );
 }
@@ -71,6 +75,7 @@ const styles = StyleSheet.create({
   image: {
     height: 211,
     width: 211,
+    marginVertical: 11,
   },
   text: {
     color: 'white',
